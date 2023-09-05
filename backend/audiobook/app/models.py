@@ -5,9 +5,7 @@ from django.db import models
 class Book(models.Model):
     title = models.CharField(max_length=120)
     author = models.CharField(max_length=120)
-    publication_date = models.DateField
-    isbn = models.CharField(max_length=120)
-    genre = models.TextField()
+    genre = models.CharField(max_length=120)
     description = models.TextField()
     audio = models.TextField()
 
