@@ -15,7 +15,7 @@ const DummyBook = {
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const Book = () => (
-  <MainCard title="Book Title">
+  <MainCard title={DummyBook.name}>
     {/* <Typography variant="body2">
       Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
       minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
@@ -23,7 +23,7 @@ const Book = () => (
       descent molls anim id est labours.
     </Typography> */}
     <Typography variant="body2">
-      {DummyBook.name}
+      {DummyBook.description}
     </Typography>
   </MainCard>
 );
