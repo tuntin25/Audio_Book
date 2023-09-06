@@ -7,6 +7,11 @@ import Loadable from 'ui-component/Loadable';
 // landing page routing
 const LandingPage = Loadable(lazy(() => import('views/landing-page')));
 
+// library page routing
+const Library = Loadable(lazy(() => import('views/library')));
+// book page routing
+const Book = Loadable(lazy(() => import('views/book')));
+
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 
@@ -29,6 +34,14 @@ const MainRoutes = {
     {
       path: '/',
       element: <LandingPage />
+    },
+    {
+      path: '/library',
+      element: <Library />
+    },
+    {
+      path: '/book',
+      element: <Book />
     },
     {
       path: 'dashboard',
