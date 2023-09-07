@@ -40,7 +40,7 @@ const MainRoutes = {
       element: <Library />
     },
     {
-      path: '/book',
+      path: '/book/:id',
       element: <Book />
     },
     {
