@@ -1,24 +1,34 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { Typography, Grid, Card, CardContent, CardMedia } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { purple } from '@mui/material/colors';
 import { useParams } from 'react-router-dom'
+import axios from "axios";
 
 function Book() {
 
-  // Dummy data
-  const DummyBook = {
-    id: 1,
-    name: 'Dark Nhan Tam',
-    author: 'Me',
-    description: 'Buy ingredients to prepare dinner',
-    coverImage: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg',
-  };
-
+  const [book, setBook] = React.useState([]);
   const { id } = useParams()
   console.log(id)
+
+  useEffect(() => {
+    axios.get("/api/books/" + id)
+      .then((res) => setBook(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+  
+  console.log(book)
+  // Dummy data
+  // const DummyBook = {
+  //   id: 1,
+  //   name: 'Dark Nhan Tam',
+  //   author: 'Me',
+  //   description: 'Buy ingredients to prepare dinner',
+  //   coverImage: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg',
+  // };
 
   // const BootstrapButton = styled(Button)({
   //   boxShadow: 'none',
@@ -74,7 +84,7 @@ function Book() {
             alt="Book Cover"
             height="500" // Set the desired height of the cover image
             style={{ width: '100%', height: 'auto' }}
-            image={DummyBook.coverImage}
+            image={book.coverImage}
           />
         </Grid>
         {/* Right side (Book Details) */}
@@ -82,15 +92,15 @@ function Book() {
           <CardContent>
             {/* Book Title */}
             <Typography variant="h5" component="div">
-              {DummyBook.name}
+              {book.name}
             </Typography>
             {/* Book Author */}
             <Typography variant="subtitle1" color="text.secondary">
-              Author: {DummyBook.author}
+              Author: {book.author}
             </Typography>
             {/* Book Description */}
             <Typography variant="body2" color="text.secondary">
-              {DummyBook.description}
+              {book.description}
             </Typography>
             <Stack spacing={1} direction="row">
               <ColorButton variant="contained">Nghe</ColorButton>
