@@ -84,7 +84,8 @@ function Book() {
             alt="Book Cover"
             height="500" // Set the desired height of the cover image
             style={{ width: '100%', height: 'auto' }}
-            image={book.coverImage}
+            // image={book.coverImage}
+            image='https://m.media-amazon.com/images/I/61YvLnnYfmL._AC_UF1000,1000_QL80_.jpg'
           />
         </Grid>
         {/* Right side (Book Details) */}
