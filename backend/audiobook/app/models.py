@@ -8,7 +8,7 @@ class Book(models.Model):
     genre = models.CharField(max_length=120)
     description = models.TextField()
     audio = models.TextField()
-
+    imgURL = models.TextField(default="")
 
     def _str_(self):
         return self.title

@@ -3,7 +3,7 @@ from .models import Book
 
 # Register your models here.
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('title', 'author', 'description', 'genre', 'audio')
+    list_display = ('title', 'author', 'description', 'genre', 'audio', 'imgURL')
 
 # Register your models here.
 
