@@ -4,7 +4,7 @@ import { Typography, Grid, Card, CardContent, CardMedia } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { purple } from '@mui/material/colors';
+import { purple, red } from '@mui/material/colors';
 import { useParams } from 'react-router-dom'
 import axios from "axios";
 
@@ -66,11 +66,19 @@ function Book() {
   //   },
   // });
 
-  const ColorButton = styled(Button)(({ theme }) => ({
+  const ColorButtonPurple = styled(Button)(({ theme }) => ({
     color: theme.palette.getContrastText(purple[500]),
     backgroundColor: purple[500],
     '&:hover': {
       backgroundColor: purple[700],
+    },
+  }));
+
+  const ColorButtonRed = styled(Button)(({ theme }) => ({
+    color: theme.palette.getContrastText(red[500]),
+    backgroundColor: red[500],
+    '&:hover': {
+      backgroundColor: red[700],
     },
   }));
 
@@ -104,7 +112,8 @@ function Book() {
               {book.description}
             </Typography>
             <Stack spacing={1} direction="row">
-              <ColorButton variant="contained">Nghe</ColorButton>
+              <ColorButtonPurple variant="contained">Nghe</ColorButtonPurple>
+              <ColorButtonRed variant="contained">Dung</ColorButtonRed>
             </Stack>
           </CardContent>
         </Grid>
