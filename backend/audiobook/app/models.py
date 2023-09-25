@@ -9,6 +9,7 @@ class Book(models.Model):
     description = models.TextField()
     audio = models.TextField()
     imgURL = models.TextField(default="")
+    audioURL = models.TextField(default="")
 
     def _str_(self):
         return self.title
