@@ -113,7 +113,7 @@ function Book() {
             </Typography>
             <Stack spacing={1} direction="row">
               <ColorButtonPurple variant="contained">Nghe</ColorButtonPurple>
-              <ColorButtonRed variant="contained">Dung</ColorButtonRed>
+              <ColorButtonRed variant="contained">Dừng</ColorButtonRed>
             </Stack>
           </CardContent>
         </Grid>
