@@ -90,7 +90,7 @@ const LandingPage = () => {
       <Typography textAlign="center">
         We are a non-profit organization with a mission to bring audio books to everyone for free.
       </Typography>
-      <Container sx={{justifyContent: "center"}}>
+      <Container sx={{textAlign:"center"}}>
       <Button sx={{mt: "50px", textAlign: "center"}}>
         More info
       </Button>
@@ -101,12 +101,13 @@ const LandingPage = () => {
   <Box sx={{display: "flex",
         alignItems: "center",
         height: "100vh",
+
       }}>
     <Container>
       <Typography variant="h1" align="center" mb="50px">Top Books</Typography>
       <Grid container spacing={5} justifyContent="center" sx={{maxHeight: '400px', overflow: 'auto'}}>
         <Grid item >
-          <Link to={`/book/${book1.id}`}>
+          <Link to={`/book/${book1.id}`} style={{textDecoration: 'none'}}>
             <BookCard book={book1}/>
           </Link>
         </Grid>

@@ -22,7 +22,7 @@ function Library() {
         alt="Book Cover"
         height="500"
         style={{ width: '100%', height: 'auto' }}
-        image={process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg'}
+        image={book.imgURL}
       />
       <CardContent>
         <Typography variant="h5" component="div">
