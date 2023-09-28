@@ -1,12 +1,13 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { Typography, Grid, Card, CardContent, CardMedia } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import { purple, red } from '@mui/material/colors';
+// import { styled } from '@mui/material/styles';
+// import Button from '@mui/material/Button';
+// import Stack from '@mui/material/Stack';
+// import { purple, red } from '@mui/material/colors';
 import { useParams } from 'react-router-dom'
 import axios from "axios";
+import ReactAudioPlayer from 'react-audio-player';
 
 function Book() {
 
@@ -66,21 +67,21 @@ function Book() {
   //   },
   // });
 
-  const ColorButtonPurple = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText(purple[500]),
-    backgroundColor: purple[500],
-    '&:hover': {
-      backgroundColor: purple[700],
-    },
-  }));
+  // const ColorButtonPurple = styled(Button)(({ theme }) => ({
+  //   color: theme.palette.getContrastText(purple[500]),
+  //   backgroundColor: purple[500],
+  //   '&:hover': {
+  //     backgroundColor: purple[700],
+  //   },
+  // }));
 
-  const ColorButtonRed = styled(Button)(({ theme }) => ({
-    color: theme.palette.getContrastText(red[500]),
-    backgroundColor: red[500],
-    '&:hover': {
-      backgroundColor: red[700],
-    },
-  }));
+  // const ColorButtonRed = styled(Button)(({ theme }) => ({
+  //   color: theme.palette.getContrastText(red[500]),
+  //   backgroundColor: red[500],
+  //   '&:hover': {
+  //     backgroundColor: red[700],
+  //   },
+  // }));
 
   return (
     <Card>
@@ -93,7 +94,7 @@ function Book() {
             height="500" // Set the desired height of the cover image
             style={{ width: '100%', height: 'auto' }}
             // image={book.coverImage}
-            image='https://m.media-amazon.com/images/I/61YvLnnYfmL._AC_UF1000,1000_QL80_.jpg'
+            image={book.imgURL}
           />
         </Grid>
         {/* Right side (Book Details) */}
@@ -101,7 +102,7 @@ function Book() {
           <CardContent>
             {/* Book Title */}
             <Typography variant="h5" component="div">
-              {book.name}
+              {book.title}
             </Typography>
             {/* Book Author */}
             <Typography variant="subtitle1" color="text.secondary">
@@ -111,10 +112,15 @@ function Book() {
             <Typography variant="body2" color="text.secondary">
               {book.description}
             </Typography>
-            <Stack spacing={1} direction="row">
+            {/* <Stack spacing={1} direction="row">
               <ColorButtonPurple variant="contained">Nghe</ColorButtonPurple>
               <ColorButtonRed variant="contained">Dừng</ColorButtonRed>
-            </Stack>
+            </Stack> */}
+            <ReactAudioPlayer
+              src={book.audioURL}
+              autoPlay
+              controls
+            />
           </CardContent>
         </Grid>
       </Grid>
