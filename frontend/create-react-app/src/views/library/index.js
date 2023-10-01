@@ -14,7 +14,7 @@ function Library() {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(bookList)
+  //console.log(bookList)
 
   const Book = ({ book }) => (
     <Card>
