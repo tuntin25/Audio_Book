@@ -3,6 +3,7 @@ import { Typography, Card, CardContent, CardMedia, Container, Grid } from '@mui/
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
+
 function Library() {
 
   const [bookList, setBookList] = React.useState([]);
@@ -20,20 +21,23 @@ function Library() {
       <CardMedia
         component="img"
         alt="Book Cover"
-        height="500"
-        style={{ width: '100%', height: 'auto' }}
+        height="400"
+        style={{ width: '100%', objectFit: 'cover'}}
         image={book.imgURL}
       />
-      <CardContent>
-        <Typography variant="h5" component="div">
+      <CardContent style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+        <Typography variant="h3" component="div" noWrap>
           {book.title}
         </Typography>
-        <Typography variant="subtitle1" color="text.secondary">
-          Author: {book.author}
+        <Typography variant="h5" color="text.secondary"noWrap>
+           {book.author}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
+        {/* <Typography variant="h5" color="text.secondary" noWrap>
+          Thể loại: {book.genre}
+        </Typography> */}
+        {/* <Typography variant="body2" color="text.secondary">
           {book.description}
-        </Typography>
+        </Typography> */}
       </CardContent>
     </Card>
   );
@@ -46,8 +50,8 @@ function Library() {
   // if (bookList.length > 0) 
   return (
     <Container>
-      <Typography variant="h4" gutterBottom>
-        Trending
+      <Typography variant="h1" gutterBottom>
+        Sách Thịnh Hành
       </Typography>
       <Grid container spacing={2}>
         {bookList.map((book) => (
