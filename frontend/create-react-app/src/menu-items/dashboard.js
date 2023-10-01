@@ -1,24 +1,35 @@
 // assets
-import { IconDashboard } from '@tabler/icons';
+import { IconBooks } from '@tabler/icons';
 
 // constant
-const icons = { IconDashboard };
+const icons = { IconBooks };
 
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
 const dashboard = {
+  // id: 'dashboard',
+  // title: 'Thư Viện',
   id: 'dashboard',
-  title: 'Dashboard',
+  title: 'Thư Viện',
   type: 'group',
   children: [
     {
       id: 'default',
-      title: 'Dashboard',
+      title: 'Thư Viện',
       type: 'item',
-      url: '/dashboard/default',
-      icon: icons.IconDashboard,
+      url: '/library',
+      icon: icons.IconBooks,
       breadcrumbs: false
     }
+    
+    // {
+    //   id: 'default',
+    //   title: 'Dashboard',
+    //   type: 'item',
+    //   url: '/dashboard/default',
+    //   icon: icons.IconDashboard,
+    //   breadcrumbs: false
+    // }
   ]
 };
 

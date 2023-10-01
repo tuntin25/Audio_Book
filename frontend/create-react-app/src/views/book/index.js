@@ -101,15 +101,19 @@ function Book() {
         <Grid item xs={12} md={8}>
           <CardContent>
             {/* Book Title */}
-            <Typography variant="h5" component="div">
+            <Typography variant="h1" component="div">
               {book.title}
             </Typography>
             {/* Book Author */}
-            <Typography variant="subtitle1" color="text.secondary">
-              Author: {book.author}
+            <Typography variant="subtitle1" >
+              Tác Giả: {book.author}
+            </Typography>
+            {/* Book Genre*/}
+            <Typography variant="subtitle1">
+              Thể Loại: {book.genre}
             </Typography>
             {/* Book Description */}
-            <Typography variant="body2" color="text.secondary">
+            <Typography variant="body1" >
               {book.description}
             </Typography>
             {/* <Stack spacing={1} direction="row">
@@ -118,7 +122,8 @@ function Book() {
             </Stack> */}
             <ReactAudioPlayer
               src={book.audioURL}
-              autoPlay
+              controlsList="nodownload" // Add this line to remove the download button
+              // autoPlay // remove Autoplay
               controls
             />
           </CardContent>
