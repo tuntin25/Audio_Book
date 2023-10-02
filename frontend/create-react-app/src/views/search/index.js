@@ -52,7 +52,7 @@ function Search() {
   return (
     <Container>
       <Typography variant="h1" gutterBottom>
-        Sách Thịnh Hành
+        Kết quả tìm kiếm
       </Typography>
       <Grid container spacing={2}>
         {bookList.map((book) => (
