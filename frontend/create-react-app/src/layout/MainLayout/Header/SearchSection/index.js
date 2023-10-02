@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom"
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
@@ -74,7 +75,7 @@ const MobileSearch = ({ value, setValue, popupState }) => {
       // }
       endAdornment={
         <InputAdornment position="end">
-          <ButtonBase sx={{ borderRadius: '12px' }}>
+          <ButtonBase sx={{ borderRadius: '12px' }} onClick={() => {handleButtonClick(value)}}>
             <HeaderAvatarStyle variant="rounded">
               <IconSearch stroke={1.5} size="1.3rem" />
             </HeaderAvatarStyle>
@@ -119,6 +120,14 @@ const SearchSection = () => {
   const theme = useTheme();
   const [value, setValue] = useState('');
 
+  const navigate = useNavigate()
+  const handleButtonClick = (value) => {
+    if (value) {
+      navigate("/search/" + value)
+      navigate(0)
+    }
+  }
+
   return (
     <>
       <Box sx={{ display: { xs: 'block', md: 'none' } }}>
@@ -126,7 +135,7 @@ const SearchSection = () => {
           {(popupState) => (
             <>
               <Box sx={{ ml: 2 }}>
-                <ButtonBase sx={{ borderRadius: '12px' }}>
+                <ButtonBase sx={{ borderRadius: '12px' }} onClick={() => {handleButtonClick(value)}}>
                   <HeaderAvatarStyle variant="rounded" {...bindToggle(popupState)}>
                     <IconSearch stroke={1.5} size="1.2rem" />
                   </HeaderAvatarStyle>
@@ -174,7 +183,7 @@ const SearchSection = () => {
           // }
           endAdornment={
             <InputAdornment position="end">
-              <ButtonBase sx={{ borderRadius: '12px' }}>
+              <ButtonBase sx={{ borderRadius: '12px' }} onClick={() => {handleButtonClick(value)}}>
                 <HeaderAvatarStyle variant="rounded">
                   <IconSearch stroke={1.5} size="1.3rem" />
                 </HeaderAvatarStyle>
