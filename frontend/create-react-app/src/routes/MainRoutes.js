@@ -15,6 +15,9 @@ const Book = Loadable(lazy(() => import('views/book')));
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 
+// library page routing
+const Search = Loadable(lazy(() => import('views/search')));
+
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
 const UtilsColor = Loadable(lazy(() => import('views/utilities/Color')));
@@ -38,6 +41,10 @@ const MainRoutes = {
     {
       path: '/library',
       element: <Library />
+    },
+    {
+      path: '/search/:searchQuery',
+      element: <Search />
     },
     {
       path: '/book/:id',

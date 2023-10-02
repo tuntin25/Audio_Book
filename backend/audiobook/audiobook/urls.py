@@ -25,4 +25,5 @@ router.register(r'books', views.BookView, 'book')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
+    path('api/search/', views.SearchAPIView.as_view(), name='search-api'),
 ]

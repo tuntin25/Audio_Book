@@ -13,23 +13,13 @@ function Book() {
 
   const [book, setBook] = React.useState([]);
   const { id } = useParams()
-  console.log(id)
+  //console.log(id)
 
   useEffect(() => {
     axios.get("/api/books/" + id)
       .then((res) => setBook(res.data))
       .catch((err) => console.log(err));
   }, []);
-  
-  console.log(book)
-  // Dummy data
-  // const DummyBook = {
-  //   id: 1,
-  //   name: 'Dark Nhan Tam',
-  //   author: 'Me',
-  //   description: 'Buy ingredients to prepare dinner',
-  //   coverImage: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg',
-  // };
 
   // const BootstrapButton = styled(Button)({
   //   boxShadow: 'none',
