@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Typography, Card, CardContent, CardMedia, Container, Grid } from '@mui/material';
+import { Typography, Card, CardContent, CardMedia, Container, Grid, styled } from '@mui/material';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
@@ -17,6 +17,7 @@ function Library() {
   //console.log(bookList)
 
   const Book = ({ book }) => (
+    <StyledCard>
     <Card>
       <CardMedia
         component="img"
@@ -40,12 +41,20 @@ function Library() {
         </Typography> */}
       </CardContent>
     </Card>
+    </StyledCard>
   );
   
   const linkStyle = {
     textDecoration: 'none', // Remove underline
     // Add any other desired styles here
+    
   };
+  const StyledCard = styled (Card) (() => ({
+  transition: 'transform 0.15s ease-in-out',
+  '&:hover': {
+    transform: 'scale(1.05)'
+  },
+  }));
 
   // if (bookList.length > 0) 
   return (
@@ -59,8 +68,9 @@ function Library() {
           <Grid key={book.id} item xs={4} sm={6} md={4} lg={3}>
             
             <Link to={`/book/${book.id}`}style={linkStyle}>
-              <Book book={book} />
+              <Book book={book}/>
             </Link>
+            
           </Grid>
         ))}
       </Grid>

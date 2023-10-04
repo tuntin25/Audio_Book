@@ -1,9 +1,11 @@
 // material-ui
-import { Typography, Box, Container,Grid,InputAdornment, TextField, Button} from '@mui/material';
+import { Typography, Box, Container,Grid,/*InputAdornment, TextField,*/ Button, MobileStepper} from '@mui/material';
 import {useState} from 'react'
-import BookCard from './BookCard.js'
-import {Link} from 'react-router-dom'
-import SearchIcon from "@mui/icons-material/Search";
+import BookCard from './BookCard.js';
+import {Link} from 'react-router-dom';
+//import SearchIcon from "@mui/icons-material/Search";
+import {autoPlay} from 'react-swipeable-views-utils';
+import SwipeableViews from 'react-swipeable-views';
 
 // project imports
 // import MainCard from 'ui-component/cards/MainCard';
@@ -11,21 +13,44 @@ import SearchIcon from "@mui/icons-material/Search";
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-const book1 = {
-    id: 1,
+// const book1 = {
+//     id: 1,
+//     title: 'Dark Nhan Tam',
+//     author: 'Me',
+//     description: 'Buy ingredients to prepare dinner',
+//     imgURL: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg',
+//    };
+
+const books = [{id: 1,
     title: 'Dark Nhan Tam',
     author: 'Me',
     description: 'Buy ingredients to prepare dinner',
-    coverImage: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg',
-   };
+    imgURL: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg',
+}, {
+  id: 2,
+    title: 'Dac Nhan Tam',
+    author: 'author',
+    description: 'Buy ingredients to prepare dinner',
+    imgURL: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg'
+
+}];
+
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
 const LandingPage = () => {
 
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
 
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setSearchTerm(event.target.value);
+  // };
+
+  const [activeStep, setActiveStep] = useState('');
+  const maxSteps = books.length;
+
+  const handleStepChange = (step) => {
+    setActiveStep(step);
+  }
 
   return (
   <>
@@ -57,7 +82,7 @@ const LandingPage = () => {
       <Typography textAlign="center" pt="25" color="black"> 
           Free Audio Books
       </Typography>
-      <Container maxWidth="md" sx={{ mt: 20, textAlign:"center" }}>
+      {/*<Container maxWidth="md" sx={{ mt: 20, textAlign:"center" }}>
         <TextField
           id="search"
           type="search"
@@ -73,7 +98,7 @@ const LandingPage = () => {
             ),
           }}
         />
-      </Container>
+      </Container>*/}
     </Container>  
   </Box>
 
@@ -84,14 +109,14 @@ const LandingPage = () => {
   alignItems: "center"
   }}>
     <Container>
-      <Typography textAlign="center" fontSize="50px" mb="50px">
+      <Typography textAlign="center" fontSize="8vh" mb="50px">
         About us
       </Typography>
-      <Typography textAlign="center">
+      <Typography textAlign="center" fontSize="4vw">
         We are a non-profit organization with a mission to bring audio books to everyone for free.
       </Typography>
       <Container sx={{textAlign:"center"}}>
-      <Button sx={{mt: "50px", textAlign: "center"}}>
+      <Button variant="contained" sx={{mt: "50px", textAlign: "center"}}>
         More info
       </Button>
       </Container>
@@ -104,9 +129,18 @@ const LandingPage = () => {
 
       }}>
     <Container>
-      <Typography variant="h1" align="center" mb="50px">Top Books</Typography>
-      <Grid container spacing={5} justifyContent="center" sx={{maxHeight: '400px', overflow: 'auto'}}>
-        <Grid item >
+      <Typography variant="h1" textAlign="center" mb="50px" gutterBottom>Top Books</Typography>
+      <Grid container justifyContent="center">
+        
+        {/* books.map((book) => {
+          return (
+            <Link to={`/book/${book.id}`} style={{textDecoration:'none'}}>
+              <BookCard book={book}
+            </Link>
+          )
+        });*/}
+
+        {/*<Grid item>
           <Link to={`/book/${book1.id}`} style={{textDecoration: 'none'}}>
             <BookCard book={book1}/>
           </Link>
@@ -118,20 +152,46 @@ const LandingPage = () => {
         </Grid>
         <Grid item>
           <BookCard book={book1}></BookCard>
-        </Grid>
-        <Grid item>
-          <BookCard book={book1}></BookCard>
-        </Grid>
-        <Grid item>
-          <BookCard book={book1}></BookCard>
-        </Grid>
+        </Grid>*/}
+
+        <AutoPlaySwipeableViews
+          index= {activeStep}
+          onChangeIndex={handleStepChange}
+          enableMouseEvents
+        >
+
+        {books.map((book, index) => {
+          return (
+            <Box key={book.title} display="flex" justifyContent="center">
+              {Math.abs(activeStep - index) <= 2 ? (
+                
+              <Grid container justifyContent="center">
+                <Grid item xs={4} sm={6} md={4} lg={3}>
+                  <Link to={`/book/${book.id}`} style={{textDecoration:'none'}}>
+                    <BookCard book={book}></BookCard>
+                  </Link>
+                </Grid>
+              </Grid>
+                 
+                ) : null}
+            </Box>
+            )
+        })}
+        </AutoPlaySwipeableViews> 
+        <MobileStepper
+          steps={maxSteps} 
+          position='static'
+          activeStep = {activeStep}
+          />
+          
+        
       </Grid>
     </Container>
   </Box>
 
   <Box sx={{}} component="footer">
     <Container maxWidth="sm">
-      <Typography variant="body1" align="center">© 2023 Sachnoi. All rights reserved.</Typography>
+      <Typography variant="body1" align="center">© {new Date().getFullYear()} Sachnoi. All rights reserved.</Typography>
     </Container>
   </Box>
   </>
