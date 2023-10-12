@@ -27,6 +27,22 @@ const books = [{id: 1,
     description: 'Buy ingredients to prepare dinner',
     imgURL: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg',
 }, {
+  id: 1,
+    title: 'Dac Nhan Tam',
+    author: 'author',
+    description: 'Buy ingredients to prepare dinner',
+    imgURL: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg'
+
+}
+, {
+  id: 2,
+    title: 'Dac Nhan Tam',
+    author: 'author',
+    description: 'Buy ingredients to prepare dinner',
+    imgURL: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg'
+
+}
+, {
   id: 2,
     title: 'Dac Nhan Tam',
     author: 'author',
@@ -163,7 +179,7 @@ const LandingPage = () => {
         {books.map((book, index) => {
           return (
             <Box key={book.title} display="flex" justifyContent="center">
-              {Math.abs(activeStep - index) <= 2 ? (
+              {Math.abs(activeStep - index) <= 4 ? (
                 
               <Grid container justifyContent="center">
                 <Grid item xs={4} sm={6} md={4} lg={3}>
