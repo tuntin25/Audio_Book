@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 
+#DotEnv
+from dotenv import load_dotenv
+import os
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-izl$rax*76q=g31p1z$u*06$+w#$@1mps*0s7nvda1j8x*uo%8'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -87,9 +92,9 @@ WSGI_APPLICATION = 'audiobook.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'audiobook', # change db name here
-        'USER': 'root', # change username here
-        'PASSWORD': 'mypassword', # change password here
+        'NAME': os.environ.get('DB_NAME'), # change db name here
+        'USER': os.environ.get('DB_USER'), # change username here
+        'PASSWORD': os.environ.get('DB_PASSWORD'), # change password here
         'HOST':'localhost',
         'PORT':'3306',
     }
