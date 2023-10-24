@@ -55,15 +55,16 @@ function Search() {
         Kết quả tìm kiếm: {searchQuery}
       </Typography>
       <Grid container spacing={2}>
-        {bookList.map((book) => (
+        {bookList.length > 0 ? bookList.map((book) => (
 
-          <Grid key={book.id} item xs={4} sm={6} md={4} lg={3}>
+          <Grid key={book.id} item xs={12} sm={6} md={4} lg={3}>
             
             <Link to={`/book/${book.id}`}style={linkStyle}>
               <Book book={book} />
             </Link>
           </Grid>
-        ))}
+        )) : (<Container sx={{display: 'flex'}}><Typography variant="body2" textAlign="center">No book found</Typography></Container>)
+        }
       </Grid>
     </Container>
   );

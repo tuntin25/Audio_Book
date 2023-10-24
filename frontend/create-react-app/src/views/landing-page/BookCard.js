@@ -22,19 +22,19 @@ const BookCard = ({book}) => {
     // </Card>
 
 
-      <Card>
+      <Card style={{width: 'auto', height:'auto', margin: 8}}>
         <CardMedia
           component="img"
           alt="Book Cover"
-          height="400"
+          
           style={{ width: '100%',height:'auto', objectFit:'cover'}}
           image={book.imgURL}
         />
-        <CardContent style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+        <CardContent style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
           <Typography variant="h3" component="div" noWrap>
             {book.title}
           </Typography>
-          <Typography variant="h5" color="text.secondary"noWrap>
+          <Typography variant="h5" color="text.secondary" noWrap>
              {book.author}
           </Typography>
           {/* <Typography variant="h5" color="text.secondary" noWrap>

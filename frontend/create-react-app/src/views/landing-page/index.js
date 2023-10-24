@@ -1,11 +1,12 @@
 // material-ui
-import { Typography, Box, Container,Grid,/*InputAdornment, TextField,*/ Button, MobileStepper} from '@mui/material';
-import {useState} from 'react'
+import { Typography, Box, Container,/*Grid,InputAdornment, TextField,*/ Button} from '@mui/material';
+import {useState, useEffect} from 'react'
 import BookCard from './BookCard.js';
 import {Link} from 'react-router-dom';
 //import SearchIcon from "@mui/icons-material/Search";
-import {autoPlay} from 'react-swipeable-views-utils';
-import SwipeableViews from 'react-swipeable-views';
+import axios from "axios";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 // project imports
 // import MainCard from 'ui-component/cards/MainCard';
@@ -13,73 +14,40 @@ import SwipeableViews from 'react-swipeable-views';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-// const book1 = {
-//     id: 1,
-//     title: 'Dark Nhan Tam',
-//     author: 'Me',
-//     description: 'Buy ingredients to prepare dinner',
-//     imgURL: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg',
-//    };
 
-const books = [{id: 1,
-    title: 'Dark Nhan Tam',
-    author: 'Me',
-    description: 'Buy ingredients to prepare dinner',
-    imgURL: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg',
-}, {
-  id: 1,
-    title: 'Dac Nhan Tam',
-    author: 'author',
-    description: 'Buy ingredients to prepare dinner',
-    imgURL: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg'
-
-}
-, {
-  id: 2,
-    title: 'Dac Nhan Tam',
-    author: 'author',
-    description: 'Buy ingredients to prepare dinner',
-    imgURL: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg'
-
-}
-, {
-  id: 2,
-    title: 'Dac Nhan Tam',
-    author: 'author',
-    description: 'Buy ingredients to prepare dinner',
-    imgURL: process.env.PUBLIC_URL + '/book-images/dac_nhan_tam__dale_carnegie.jpg'
-
-}];
-
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
 const LandingPage = () => {
 
-  // const [searchTerm, setSearchTerm] = useState("");
+const [bookList, setBookList] = useState([]);
 
-  // const handleChange = (event) => {
-  //   setSearchTerm(event.target.value);
-  // };
+  useEffect(() => {
+    axios.get("/api/books/")
+      .then((res) => setBookList(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
-  const [activeStep, setActiveStep] = useState('');
-  const maxSteps = books.length;
-
-  const handleStepChange = (step) => {
-    setActiveStep(step);
+ const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
   }
+};
 
   return (
   <>
- {/* <MainCard title="Sample Card">
-    <Typography variant="body2">
-      Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-      minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
-      in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa qui officiate
-      descent molls anim id est labours.
-    </Typography>
-  </MainCard>*/}
-
-    {/*Dummy data*/}
     
 
 
@@ -98,23 +66,7 @@ const LandingPage = () => {
       <Typography textAlign="center" pt="25" color="black"> 
           Free Audio Books
       </Typography>
-      {/*<Container maxWidth="md" sx={{ mt: 20, textAlign:"center" }}>
-        <TextField
-          id="search"
-          type="search"
-          label="Search"
-          value={searchTerm}
-          onChange={handleChange}
-          sx={{ width: "50vw"}}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </Container>*/}
+
     </Container>  
   </Box>
 
@@ -146,62 +98,30 @@ const LandingPage = () => {
       }}>
     <Container>
       <Typography variant="h1" textAlign="center" mb="50px" gutterBottom>Top Books</Typography>
-      <Grid container justifyContent="center">
-        
-        {/* books.map((book) => {
-          return (
-            <Link to={`/book/${book.id}`} style={{textDecoration:'none'}}>
-              <BookCard book={book}
+      <Box>
+      <Carousel
+        responsive={responsive}
+        autoPlay={false}
+        swipable={true}
+        draggable={true}
+        showDots={true}
+        infinite={true}
+        partialVisible={true}
+        renderButtonGroupOutside={true}
+        centerMode={false}
+        removeArrowOnDeviceType={['tablet', 'mobile']}
+      >
+      {bookList.map((book, index) => {
+        return (
+          <div className="carouselItem" key={index} style={{overflow: 'hidden'}}>
+            <Link to={`/book/${book.id}`} style={{textDecoration: 'none'}}>
+              <BookCard book={book}></BookCard>
             </Link>
-          )
-        });*/}
-
-        {/*<Grid item>
-          <Link to={`/book/${book1.id}`} style={{textDecoration: 'none'}}>
-            <BookCard book={book1}/>
-          </Link>
-        </Grid>
-        <Grid item >
-          <Link to={`/book/${book1.id}`}>
-            <BookCard book={book1}/>
-          </Link>
-        </Grid>
-        <Grid item>
-          <BookCard book={book1}></BookCard>
-        </Grid>*/}
-
-        <AutoPlaySwipeableViews
-          index= {activeStep}
-          onChangeIndex={handleStepChange}
-          enableMouseEvents
-        >
-
-        {books.map((book, index) => {
-          return (
-            <Box key={book.title} display="flex" justifyContent="center">
-              {Math.abs(activeStep - index) <= 4 ? (
-                
-              <Grid container justifyContent="center">
-                <Grid item xs={4} sm={6} md={4} lg={3}>
-                  <Link to={`/book/${book.id}`} style={{textDecoration:'none'}}>
-                    <BookCard book={book}></BookCard>
-                  </Link>
-                </Grid>
-              </Grid>
-                 
-                ) : null}
-            </Box>
-            )
-        })}
-        </AutoPlaySwipeableViews> 
-        <MobileStepper
-          steps={maxSteps} 
-          position='static'
-          activeStep = {activeStep}
-          />
-          
+          </div>)
+      })}
+      </Carousel>
+      </Box>
         
-      </Grid>
     </Container>
   </Box>
 

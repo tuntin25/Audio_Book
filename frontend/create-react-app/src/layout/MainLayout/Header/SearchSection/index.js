@@ -62,6 +62,14 @@ const HeaderAvatarStyle = styled(Avatar, { shouldForwardProp })(({ theme }) => (
 const MobileSearch = ({ value, setValue, popupState }) => {
   const theme = useTheme();
 
+  const navigate = useNavigate()
+  const handleButtonClick = (value) => {
+    if (value) {
+      navigate("/search/" + value)
+      navigate(0)
+    }
+  }
+
   return (
     <OutlineInputStyle
       id="input-search-header"
