@@ -6,19 +6,23 @@ import { Typography, Grid, Card, CardContent, CardMedia } from '@mui/material';
 // import Stack from '@mui/material/Stack';
 // import { purple, red } from '@mui/material/colors';
 import { useParams } from 'react-router-dom'
-import axios from "axios";
+// import axios from "axios";
 import ReactAudioPlayer from 'react-audio-player';
+import { getBookById } from 'api/api';
 
 function Book() {
 
   const [book, setBook] = React.useState([]);
   const { id } = useParams()
-  //console.log(id)
 
   useEffect(() => {
-    axios.get("/api/books/" + id)
-      .then((res) => setBook(res.data))
-      .catch((err) => console.log(err));
+    getBookById(id)
+      .then(data => {
+        setBook(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   }, []);
 
   // const BootstrapButton = styled(Button)({
