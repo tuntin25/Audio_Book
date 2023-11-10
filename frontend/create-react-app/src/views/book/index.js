@@ -7,7 +7,7 @@ import { Typography, Grid, Card, CardContent, CardMedia } from '@mui/material';
 // import { purple, red } from '@mui/material/colors';
 import { useParams } from 'react-router-dom'
 import ReactAudioPlayer from 'react-audio-player';
-import { getBookById } from 'api/api';
+import { getBookById } from 'api';
 
 function Book() {
 
