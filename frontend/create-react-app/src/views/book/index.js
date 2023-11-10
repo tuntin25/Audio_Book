@@ -6,7 +6,6 @@ import { Typography, Grid, Card, CardContent, CardMedia } from '@mui/material';
 // import Stack from '@mui/material/Stack';
 // import { purple, red } from '@mui/material/colors';
 import { useParams } from 'react-router-dom'
-// import axios from "axios";
 import ReactAudioPlayer from 'react-audio-player';
 import { getBookById } from 'api/api';
 

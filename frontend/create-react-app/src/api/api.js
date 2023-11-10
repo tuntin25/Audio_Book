@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const getBookById = async (id) => {
     const apiUrl = `/api/books/${id}`;
