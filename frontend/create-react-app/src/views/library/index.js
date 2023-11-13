@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Typography, Card, CardContent, CardMedia, Container, Grid, styled } from '@mui/material';
-import axios from "axios";
 import { Link } from 'react-router-dom';
+import {getAllBooks} from 'api'
 
 
 function Library() {
@@ -9,11 +9,14 @@ function Library() {
   const [bookList, setBookList] = React.useState([]);
 
   useEffect(() => {
-    axios.get("/api/books/")
-      .then((res) => setBookList(res.data))
-      .catch((err) => console.log(err));
+    getAllBooks()
+      .then(data => {
+        setBookList(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   }, []);
-
   //console.log(bookList)
 
   const Book = ({ book }) => (

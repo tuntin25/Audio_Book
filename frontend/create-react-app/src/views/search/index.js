@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Typography, Card, CardContent, CardMedia, Container, Grid } from '@mui/material';
-import axios from "axios";
 import { Link, useParams } from 'react-router-dom';
+import {searchBooks} from 'api'
 
 
 function Search() {
@@ -9,10 +9,14 @@ function Search() {
   const [bookList, setBookList] = React.useState([]);
   const { searchQuery } = useParams()
 
-  useEffect(() => {
-    axios.get("/api/search/?query="+searchQuery)
-      .then((res) => setBookList(res.data))
-      .catch((err) => console.log(err));
+    useEffect(() => {
+    searchBooks(searchQuery)
+      .then(data => {
+        setBookList(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   }, []);
 
   //console.log(bookList)
@@ -63,7 +67,7 @@ function Search() {
               <Book book={book} />
             </Link>
           </Grid>
-        )) : (<Container sx={{display: 'flex'}}><Typography variant="body2" textAlign="center">No book found</Typography></Container>)
+        )) : (<Container sx={{display: 'flex', justifyContent:'center'}}><Typography variant="body2">No book found</Typography></Container>)
         }
       </Grid>
     </Container>

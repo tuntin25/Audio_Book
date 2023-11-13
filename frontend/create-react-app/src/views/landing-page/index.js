@@ -4,9 +4,9 @@ import {useState, useEffect} from 'react'
 import BookCard from './BookCard.js';
 import {Link} from 'react-router-dom';
 //import SearchIcon from "@mui/icons-material/Search";
-import axios from "axios";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import {getAllBooks} from 'api'
 
 // project imports
 // import MainCard from 'ui-component/cards/MainCard';
@@ -20,10 +20,16 @@ const LandingPage = () => {
 
 const [bookList, setBookList] = useState([]);
 
+
+
   useEffect(() => {
-    axios.get("/api/books/")
-      .then((res) => setBookList(res.data))
-      .catch((err) => console.log(err));
+    getAllBooks()
+      .then(data => {
+        setBookList(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
   }, []);
 
  const responsive = {
@@ -101,7 +107,7 @@ const [bookList, setBookList] = useState([]);
       <Box>
       <Carousel
         responsive={responsive}
-        autoPlay={false}
+        autoPlay={true}
         swipable={true}
         draggable={true}
         showDots={true}
