@@ -135,6 +135,11 @@ const SearchSection = () => {
       navigate(0)
     }
   }
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleButtonClick(value);
+    }
+  }
 
   return (
     <>
@@ -143,7 +148,7 @@ const SearchSection = () => {
           {(popupState) => (
             <>
               <Box sx={{ ml: 2 }}>
-                <ButtonBase sx={{ borderRadius: '12px' }} onClick={() => {handleButtonClick(value)}}>
+                <ButtonBase sx={{ borderRadius: '12px' }}  onClick={() => {handleButtonClick(value)}}>
                   <HeaderAvatarStyle variant="rounded" {...bindToggle(popupState)}>
                     <IconSearch stroke={1.5} size="1.2rem" />
                   </HeaderAvatarStyle>
@@ -184,6 +189,7 @@ const SearchSection = () => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder="Tìm Theo Sách, Tác Giả hoặc Thể Loại"
+          onKeyDown={handleKeyDown}
           // startAdornment={
           //   <InputAdornment position="start">
           //     <IconSearch stroke={1.5} size="1rem" color={theme.palette.grey[500]} />
