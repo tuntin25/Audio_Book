@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Typography, Card, CardContent, CardMedia, Container, Grid } from '@mui/material';
+import { Typography, Card, CardContent, CardMedia, Container, Grid,Box } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
 import {searchBooks} from 'api'
 
@@ -67,7 +67,7 @@ function Search() {
               <Book book={book} />
             </Link>
           </Grid>
-        )) : (<Container sx={{display: 'flex', justifyContent:'center'}}><Typography variant="body2">No book found</Typography></Container>)
+        )) : (<Box sx={{display: 'flex',alignItems: 'center'}}><Container><Typography textAlign='center'>No book found</Typography></Container></Box>)
         }
       </Grid>
     </Container>
