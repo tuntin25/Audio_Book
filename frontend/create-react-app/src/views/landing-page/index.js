@@ -1,12 +1,16 @@
 // material-ui
-import { Typography, Box, Container,/*Grid,InputAdornment, TextField,*/ Button} from '@mui/material';
+import { Typography, Box, Container,ButtonBase, Avatar, Button} from '@mui/material';
 import {useState, useEffect} from 'react'
 import BookCard from './BookCard.js';
 import {Link} from 'react-router-dom';
 //import SearchIcon from "@mui/icons-material/Search";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import {getAllBooks} from 'api'
+import {getAllBooks} from 'api';
+import { IconMicrophone } from '@tabler/icons';
+import { useTheme } from '@mui/material/styles';
+
+
 
 // project imports
 // import MainCard from 'ui-component/cards/MainCard';
@@ -14,13 +18,11 @@ import {getAllBooks} from 'api'
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-
-
 const LandingPage = () => {
 
 const [bookList, setBookList] = useState([]);
 
-
+const theme = useTheme();
 
   useEffect(() => {
     getAllBooks()
@@ -44,13 +46,48 @@ const [bookList, setBookList] = useState([]);
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2
+    items: 3
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1
   }
 };
+
+const MicSearchIcon = () => {
+  return (
+  <Box sx={{display:'flex', justifyContent: 'center'}} > 
+
+                <ButtonBase sx={{ borderRadius: '300px'}} onClick={() => {handleButtonClick(value)}}>
+                <Avatar
+            
+            sx={{
+              ...theme.typography.commonAvatar,
+              ...theme.typography.mediumAvatar,
+              transition: 'all .2s ease-in-out',
+              background: theme.palette.secondary.dark ,
+              color: theme.palette.secondary.light,
+              '&:hover': {
+                background: theme.palette.secondary.light,
+                color: theme.palette.secondary.dark
+              } ,
+              height:'25vh',
+              width: '25vh',
+              borderRadius:'50%'
+            }}
+            // onClick={handleLeftDrawerToggle}
+            color="inherit"
+          >
+                  {/* <HeaderAvatarStyle variant="rounded" {...bindToggle(popupState)}> */}
+                    <IconMicrophone stroke={1.5} size="40vw" />
+                  {/* </HeaderAvatarStyle> */}
+                  </Avatar>
+                </ButtonBase>
+              
+  </Box>
+  )
+}
+
 
   return (
   <>
@@ -69,10 +106,10 @@ const [bookList, setBookList] = useState([]);
       sx={{fontSize: {xs:65, md:85}, color: "#000"}}
       >SACHNOI
       </Typography> 
-      <Typography textAlign="center" pt="25" color="black"> 
+      <Typography textAlign="center" mt="25px" mb='50px' color="black"> 
           Free Audio Books
       </Typography>
-
+      <MicSearchIcon />
     </Container>  
   </Box>
 
@@ -113,7 +150,7 @@ const [bookList, setBookList] = useState([]);
         showDots={true}
         infinite={true}
         partialVisible={true}
-        renderButtonGroupOutside={true}
+        renderButtonGroupOutside={false}
         centerMode={false}
         removeArrowOnDeviceType={['tablet', 'mobile']}
       >
