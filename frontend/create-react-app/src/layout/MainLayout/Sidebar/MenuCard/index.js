@@ -10,6 +10,7 @@ import {
   LinearProgress,
   List,
   ListItem,
+  ListItemText,
   ListItemAvatar,
   Typography,
   linearProgressClasses
@@ -104,7 +105,7 @@ const MenuCard = () => {
                 <TableChartOutlinedIcon fontSize="inherit" />
               </Avatar>
             </ListItemAvatar>
-            {/* <ListItemText
+            <ListItemText
               sx={{ mt: 0 }}
               primary={
                 <Typography variant="subtitle1" sx={{ color: theme.palette.primary[800] }}>
@@ -112,7 +113,7 @@ const MenuCard = () => {
                 </Typography>
               }
               secondary={<Typography variant="caption"> 28/23 GB</Typography>}
-            /> */}
+            />
           </ListItem>
         </List>
         <LinearProgressWithLabel value={80} />
