@@ -16,6 +16,8 @@ import Transitions from 'ui-component/extended/Transitions';
 import { IconSearch, IconX ,IconMicrophone} from '@tabler/icons';
 import { shouldForwardProp } from '@mui/system';
 
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 // styles
 const PopperStyle = styled(Popper, { shouldForwardProp })(({ theme }) => ({
   zIndex: 1100,
@@ -69,6 +71,17 @@ const MobileSearch = ({ value, setValue, popupState }) => {
       navigate(0)
     }
   }
+  // const {
+  //   transcript,
+  //   listening,
+  //   resetTranscript,
+  //   browserSupportsSpeechRecognition
+  // } = useSpeechRecognition();
+
+  // if (!browserSupportsSpeechRecognition) {
+  //   return <span>Browser does not support speech recognition.</span>;
+  // }
+
 
   return (
     <OutlineInputStyle
@@ -142,6 +155,30 @@ const SearchSection = () => {
     }
   }
 
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition
+  } = useSpeechRecognition();
+
+  if (!browserSupportsSpeechRecognition) {
+    return <span>Browser does not support speech recognition.</span>;
+  }
+
+  const handleMicrophone = () => {
+    const lstning = listening ? 'on' : 'off';
+    SpeechRecognition.startListening({language: 'vi-VN'});
+    if (lstning) console.log('listening')
+    //SpeechRecognition.stopListening();
+      transcript = '123456';
+    setTimeout(resetTranscript, 10000);
+    setValue(transcript)
+    console.log(transcript)
+  }
+
+ 
+
   return (
     <>
       <Box sx={{ display: { xs: 'block', md: 'none' } }}>
@@ -203,7 +240,7 @@ const SearchSection = () => {
                   <IconSearch stroke={1.5} size="1.3rem" />
                 </HeaderAvatarStyle>
               </ButtonBase>
-              <ButtonBase sx={{ borderRadius: '12px' }} onClick={() => {handleButtonClick(value)}}>
+              <ButtonBase sx={{ borderRadius: '12px' }} onClick={() => {handleMicrophone(value)}}>
                 <HeaderAvatarStyle variant="rounded">
                   <IconMicrophone stroke={1.5}  size="1.3rem" />
                 </HeaderAvatarStyle>
