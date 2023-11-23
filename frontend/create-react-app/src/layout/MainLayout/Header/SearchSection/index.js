@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from "react-router-dom"
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
@@ -138,8 +138,15 @@ MobileSearch.propTypes = {
 // ==============================|| SEARCH INPUT ||============================== //
 
 const SearchSection = () => {
+  
+  // Need to fix: value does not retain after re-rendering
   const theme = useTheme();
+  const { searchQuery } = useParams();
   const [value, setValue] = useState('');
+
+  useEffect(() => {
+    setValue(searchQuery);
+  }, [searchQuery]);
 
   const navigate = useNavigate()
   const handleButtonClick = (value) => {
@@ -149,7 +156,6 @@ const SearchSection = () => {
     }
   }
   const handleKeyDown = (event) => {
-
     if (event.key === 'Enter') {
       handleButtonClick(value);
     }
@@ -158,26 +164,21 @@ const SearchSection = () => {
   const {
     transcript,
     listening,
-    resetTranscript,
+    // resetTranscript,
     browserSupportsSpeechRecognition
   } = useSpeechRecognition();
 
   if (!browserSupportsSpeechRecognition) {
-    return <span>Browser does not support speech recognition.</span>;
+    windows.alert("Browser does not support speech recognition")
   }
+
+  useEffect(() => {
+    setValue(transcript);
+  }, [listening]);
 
   const handleMicrophone = () => {
-    const lstning = listening ? 'on' : 'off';
-    SpeechRecognition.startListening({language: 'vi-VN'});
-    if (lstning) console.log('listening')
-    //SpeechRecognition.stopListening();
-      transcript = '123456';
-    setTimeout(resetTranscript, 10000);
-    setValue(transcript)
-    console.log(transcript)
+    SpeechRecognition.startListening({ language: 'vi-VN' });
   }
-
- 
 
   return (
     <>
@@ -240,7 +241,7 @@ const SearchSection = () => {
                   <IconSearch stroke={1.5} size="1.3rem" />
                 </HeaderAvatarStyle>
               </ButtonBase>
-              <ButtonBase sx={{ borderRadius: '12px' }} onClick={() => {handleMicrophone(value)}}>
+              <ButtonBase sx={{ borderRadius: '12px' }} onClick={() => {handleMicrophone()}}>
                 <HeaderAvatarStyle variant="rounded">
                   <IconMicrophone stroke={1.5}  size="1.3rem" />
                 </HeaderAvatarStyle>
