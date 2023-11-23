@@ -13,7 +13,7 @@ import PopupState, { bindPopper, bindToggle } from 'material-ui-popup-state';
 import Transitions from 'ui-component/extended/Transitions';
 
 // assets
-import { IconSearch, IconX } from '@tabler/icons';
+import { IconSearch, IconX ,IconMicrophone} from '@tabler/icons';
 import { shouldForwardProp } from '@mui/system';
 
 // styles
@@ -136,6 +136,7 @@ const SearchSection = () => {
     }
   }
   const handleKeyDown = (event) => {
+
     if (event.key === 'Enter') {
       handleButtonClick(value);
     }
@@ -197,13 +198,19 @@ const SearchSection = () => {
           // }
           endAdornment={
             <InputAdornment position="end">
-              <ButtonBase sx={{ borderRadius: '12px' }} onClick={() => {handleButtonClick(value)}}>
+              <ButtonBase sx={{ borderRadius: '12px',marginRight: '8px' }} onClick={() => {handleButtonClick(value)}}>
                 <HeaderAvatarStyle variant="rounded">
                   <IconSearch stroke={1.5} size="1.3rem" />
                 </HeaderAvatarStyle>
               </ButtonBase>
+              <ButtonBase sx={{ borderRadius: '12px' }} onClick={() => {handleButtonClick(value)}}>
+                <HeaderAvatarStyle variant="rounded">
+                  <IconMicrophone stroke={1.5}  size="1.3rem" />
+                </HeaderAvatarStyle>
+              </ButtonBase>
             </InputAdornment>
           }
+
           aria-describedby="search-helper-text"
           inputProps={{ 'aria-label': 'weight' }}
         />

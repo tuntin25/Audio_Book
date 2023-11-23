@@ -11,7 +11,7 @@ import SearchSection from './SearchSection';
 //import NotificationSection from './NotificationSection';
 
 // assets
-import { IconMenu2,IconMicrophone } from '@tabler/icons';
+import { IconMenu2} from '@tabler/icons';
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
@@ -60,7 +60,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
       <SearchSection />
       {/* voice search */}
       
-      <Box sx={{ ml: 2 }}>
+      {/* <Box sx={{ ml: 2 }}>
                 <ButtonBase sx={{ borderRadius: '12px' }} onClick={() => {handleButtonClick(value)}}>
                 <Avatar
             variant="rounded"
@@ -70,6 +70,8 @@ const Header = ({ handleLeftDrawerToggle }) => {
               transition: 'all .2s ease-in-out',
               background: theme.palette.secondary.light,
               color: theme.palette.secondary.dark,
+              width: '38px', 
+              height: '38px',
               '&:hover': {
                 background: theme.palette.secondary.dark,
                 color: theme.palette.secondary.light
@@ -78,14 +80,14 @@ const Header = ({ handleLeftDrawerToggle }) => {
             onClick={handleLeftDrawerToggle}
             color="inherit"
           >
-                  {/* <HeaderAvatarStyle variant="rounded" {...bindToggle(popupState)}> */}
+                  <HeaderAvatarStyle variant="rounded" {...bindToggle(popupState)}>
                     <IconMicrophone stroke={1.5} size="1.2rem" />
-                  {/* </HeaderAvatarStyle> */}
+                  </HeaderAvatarStyle>
                   </Avatar>
                 </ButtonBase>
-              </Box>
+      </Box>
       <Box sx={{ flexGrow: 1 }} />
-      <Box sx={{ flexGrow: 1 }} />
+      <Box sx={{ flexGrow: 1 }} /> */}
       {/* notification & profile */}
       {/*<NotificationSection />
       <ProfileSection />*/}
