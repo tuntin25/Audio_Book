@@ -151,7 +151,8 @@ const SearchSection = () => {
   const navigate = useNavigate()
   const handleButtonClick = (value) => {
     if (value) {
-      navigate("/search/" + value)
+      const filteredValue = value.replace(/\./g,"");
+      navigate("/search/" + filteredValue)
       navigate(0)
     }
   }

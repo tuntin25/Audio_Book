@@ -33,7 +33,8 @@ export default function SearchModal(props) {
   useEffect(() => {
     if (searchValue && !listening) {
       console.log('Search : ' + searchValue);
-      navigate('/search/' + searchValue)
+      const filteredValue = searchValue.replace(/\./g,"");
+      navigate('/search/' + filteredValue)
     }
   },[listening])
 
