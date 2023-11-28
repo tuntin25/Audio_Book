@@ -67,7 +67,7 @@ function Search() {
               <Book book={book} />
             </Link>
           </Grid>
-        )) : (<Box sx={{display: 'flex',alignItems: 'center'}}><Container><Typography textAlign='center'>No book found</Typography></Container></Box>)
+        )) : (<Box sx={{display: 'flex',alignItems: 'center', justifyContent:'center', backgroundColor:'blue'}}><Box><Typography textAlign='center'>No book found</Typography></Box></Box>)
         }
       </Grid>
     </Container>
