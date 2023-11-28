@@ -21,7 +21,7 @@ const dashboard = {
       icon: icons.IconBooks,
       breadcrumbs: false
     }
-    
+
     // {
     //   id: 'default',
     //   title: 'Dashboard',

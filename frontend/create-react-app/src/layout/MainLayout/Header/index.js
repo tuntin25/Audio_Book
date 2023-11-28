@@ -11,7 +11,7 @@ import SearchSection from './SearchSection';
 //import NotificationSection from './NotificationSection';
 
 // assets
-import { IconMenu2} from '@tabler/icons';
+import { IconMenu2 } from '@tabler/icons';
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
@@ -51,7 +51,6 @@ const Header = ({ handleLeftDrawerToggle }) => {
             color="inherit"
           >
             <IconMenu2 stroke={1.5} size="1.3rem" />
-            
           </Avatar>
         </ButtonBase>
       </Box>
@@ -59,7 +58,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
       {/* header search */}
       <SearchSection />
       {/* voice search */}
-      
+
       {/* <Box sx={{ ml: 2 }}>
                 <ButtonBase sx={{ borderRadius: '12px' }} onClick={() => {handleButtonClick(value)}}>
                 <Avatar

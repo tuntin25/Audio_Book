@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from 'react-router-dom';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
@@ -13,7 +13,7 @@ import PopupState, { bindPopper, bindToggle } from 'material-ui-popup-state';
 import Transitions from 'ui-component/extended/Transitions';
 
 // assets
-import { IconSearch, IconX ,IconMicrophone} from '@tabler/icons';
+import { IconSearch, IconX, IconMicrophone } from '@tabler/icons';
 import { shouldForwardProp } from '@mui/system';
 
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
@@ -64,13 +64,13 @@ const HeaderAvatarStyle = styled(Avatar, { shouldForwardProp })(({ theme }) => (
 const MobileSearch = ({ value, setValue, popupState }) => {
   const theme = useTheme();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleButtonClick = (value) => {
     if (value) {
-      navigate("/search/" + value)
-      navigate(0)
+      navigate('/search/' + value);
+      navigate(0);
     }
-  }
+  };
   // const {
   //   transcript,
   //   listening,
@@ -81,7 +81,6 @@ const MobileSearch = ({ value, setValue, popupState }) => {
   // if (!browserSupportsSpeechRecognition) {
   //   return <span>Browser does not support speech recognition.</span>;
   // }
-
 
   return (
     <OutlineInputStyle
@@ -96,7 +95,12 @@ const MobileSearch = ({ value, setValue, popupState }) => {
       // }
       endAdornment={
         <InputAdornment position="end">
-          <ButtonBase sx={{ borderRadius: '12px' }} onClick={() => {handleButtonClick(value)}}>
+          <ButtonBase
+            sx={{ borderRadius: '12px' }}
+            onClick={() => {
+              handleButtonClick(value);
+            }}
+          >
             <HeaderAvatarStyle variant="rounded">
               <IconSearch stroke={1.5} size="1.3rem" />
             </HeaderAvatarStyle>
@@ -138,7 +142,6 @@ MobileSearch.propTypes = {
 // ==============================|| SEARCH INPUT ||============================== //
 
 const SearchSection = () => {
-  
   // Need to fix: value does not retain after re-rendering
   const theme = useTheme();
   const { searchQuery } = useParams();
@@ -148,19 +151,19 @@ const SearchSection = () => {
     setValue(searchQuery);
   }, [searchQuery]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleButtonClick = (value) => {
     if (value) {
-      const filteredValue = value.replace(/\./g,"");
-      navigate("/search/" + filteredValue)
-      navigate(0)
+      const filteredValue = value.replace(/\./g, '');
+      navigate('/search/' + filteredValue);
+      navigate(0);
     }
-  }
+  };
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
       handleButtonClick(value);
     }
-  }
+  };
 
   const {
     transcript,
@@ -170,7 +173,7 @@ const SearchSection = () => {
   } = useSpeechRecognition();
 
   if (!browserSupportsSpeechRecognition) {
-    windows.alert("Browser does not support speech recognition")
+    windows.alert('Browser does not support speech recognition');
   }
 
   useEffect(() => {
@@ -179,7 +182,7 @@ const SearchSection = () => {
 
   const handleMicrophone = () => {
     SpeechRecognition.startListening({ language: 'vi-VN' });
-  }
+  };
 
   return (
     <>
@@ -188,7 +191,12 @@ const SearchSection = () => {
           {(popupState) => (
             <>
               <Box sx={{ ml: 2 }}>
-                <ButtonBase sx={{ borderRadius: '12px' }}  onClick={() => {handleButtonClick(value)}}>
+                <ButtonBase
+                  sx={{ borderRadius: '12px' }}
+                  onClick={() => {
+                    handleButtonClick(value);
+                  }}
+                >
                   <HeaderAvatarStyle variant="rounded" {...bindToggle(popupState)}>
                     <IconSearch stroke={1.5} size="1.2rem" />
                   </HeaderAvatarStyle>
@@ -237,19 +245,28 @@ const SearchSection = () => {
           // }
           endAdornment={
             <InputAdornment position="end">
-              <ButtonBase sx={{ borderRadius: '12px',marginRight: '8px' }} onClick={() => {handleButtonClick(value)}}>
+              <ButtonBase
+                sx={{ borderRadius: '12px', marginRight: '8px' }}
+                onClick={() => {
+                  handleButtonClick(value);
+                }}
+              >
                 <HeaderAvatarStyle variant="rounded">
                   <IconSearch stroke={1.5} size="1.3rem" />
                 </HeaderAvatarStyle>
               </ButtonBase>
-              <ButtonBase sx={{ borderRadius: '12px' }} onClick={() => {handleMicrophone()}}>
+              <ButtonBase
+                sx={{ borderRadius: '12px' }}
+                onClick={() => {
+                  handleMicrophone();
+                }}
+              >
                 <HeaderAvatarStyle variant="rounded">
-                  <IconMicrophone stroke={1.5}  size="1.3rem" />
+                  <IconMicrophone stroke={1.5} size="1.3rem" />
                 </HeaderAvatarStyle>
               </ButtonBase>
             </InputAdornment>
           }
-
           aria-describedby="search-helper-text"
           inputProps={{ 'aria-label': 'weight' }}
         />

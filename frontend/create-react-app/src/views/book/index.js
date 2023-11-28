@@ -5,21 +5,20 @@ import { Typography, Grid, Card, CardContent, CardMedia } from '@mui/material';
 // import Button from '@mui/material/Button';
 // import Stack from '@mui/material/Stack';
 // import { purple, red } from '@mui/material/colors';
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 import ReactAudioPlayer from 'react-audio-player';
 import { getBookById } from 'api';
 
 function Book() {
-
   const [book, setBook] = React.useState([]);
-  const { id } = useParams()
+  const { id } = useParams();
 
   useEffect(() => {
     getBookById(id)
-      .then(data => {
+      .then((data) => {
         setBook(data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error:', error);
       });
   }, []);
@@ -98,17 +97,11 @@ function Book() {
               {book.title}
             </Typography>
             {/* Book Author */}
-            <Typography variant="subtitle1" >
-              Tác Giả: {book.author}
-            </Typography>
+            <Typography variant="subtitle1">Tác Giả: {book.author}</Typography>
             {/* Book Genre*/}
-            <Typography variant="subtitle1">
-              Thể Loại: {book.genre}
-            </Typography>
+            <Typography variant="subtitle1">Thể Loại: {book.genre}</Typography>
             {/* Book Description */}
-            <Typography variant="body1" >
-              {book.description}
-            </Typography>
+            <Typography variant="body1">{book.description}</Typography>
             {/* <Stack spacing={1} direction="row">
               <ColorButtonPurple variant="contained">Nghe</ColorButtonPurple>
               <ColorButtonRed variant="contained">Dừng</ColorButtonRed>
