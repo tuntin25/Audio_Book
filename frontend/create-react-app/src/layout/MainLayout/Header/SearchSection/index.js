@@ -17,6 +17,8 @@ import { IconSearch, IconX, IconMicrophone } from '@tabler/icons';
 import { shouldForwardProp } from '@mui/system';
 
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import SearchModal from 'ui-component/modal/SearchModal';
+
 
 // styles
 const PopperStyle = styled(Popper, { shouldForwardProp })(({ theme }) => ({
@@ -165,24 +167,48 @@ const SearchSection = () => {
     }
   };
 
-  const {
-    transcript,
-    listening,
-    // resetTranscript,
-    browserSupportsSpeechRecognition
-  } = useSpeechRecognition();
+  // const {
+  //   transcript,
+  //   listening,
+  //   // resetTranscript,
+  //   browserSupportsSpeechRecognition
+  // } = useSpeechRecognition();
 
-  if (!browserSupportsSpeechRecognition) {
-    windows.alert('Browser does not support speech recognition');
-  }
+  // if (!browserSupportsSpeechRecognition) {
+  //   windows.alert('Browser does not support speech recognition');
+  // }
+  const [openModal, setOpenModal] = useState(false);
+  const handleOpenModal = () => {
+    setOpenModal(true);
+    SpeechRecognition.startListening({ language: 'vi-VN' });
+    console.log('modal opened');
+  };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    SpeechRecognition.stopListening();
+    console.log('modal closed');
+  };
+
+  // const [show, setShow] = useState(false);
+  // const handleShow = () => setShow(true);
+
+  const [searchValue, setSearchValue] = useState('');
+  const { listening, transcript } = useSpeechRecognition();
+
+  useEffect(() => {
+    setSearchValue(transcript);
+    console.log(transcript);
+  }, [transcript]);
 
   useEffect(() => {
     setValue(transcript);
   }, [listening]);
 
-  const handleMicrophone = () => {
-    SpeechRecognition.startListening({ language: 'vi-VN' });
-  };
+  // const handleMicrophone = () => {
+  //   SpeechRecognition.startListening({ language: 'vi-VN' });
+  // };
+
+
 
   return (
     <>
@@ -258,7 +284,8 @@ const SearchSection = () => {
               <ButtonBase
                 sx={{ borderRadius: '12px' }}
                 onClick={() => {
-                  handleMicrophone();
+                  // handleMicrophone();
+                  handleOpenModal();
                 }}
               >
                 <HeaderAvatarStyle variant="rounded">
@@ -270,7 +297,10 @@ const SearchSection = () => {
           aria-describedby="search-helper-text"
           inputProps={{ 'aria-label': 'weight' }}
         />
+      <SearchModal openModal={openModal} handleCloseModal={handleCloseModal} searchValue={searchValue} listening={listening} />
       </Box>
+     
+
     </>
   );
 };

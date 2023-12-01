@@ -31,6 +31,7 @@ export default function SearchModal(props) {
     if (searchValue && !listening) {
       console.log('Search : ' + searchValue);
       const filteredValue = searchValue.replace(/\./g, '');
+      handleCloseModal();
       navigate('/search/' + filteredValue);
     }
   }, [listening]);
