@@ -9,6 +9,7 @@ const LandingPage = Loadable(lazy(() => import('views/landing-page')));
 
 // library page routing
 const Library = Loadable(lazy(() => import('views/library')));
+
 // book page routing
 const Book = Loadable(lazy(() => import('views/book')));
 
@@ -17,6 +18,9 @@ const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')))
 
 // library page routing
 const Search = Loadable(lazy(() => import('views/search')));
+
+// upload page routing
+const Upload = Loadable(lazy(() => import('views/upload')));
 
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
@@ -49,6 +53,10 @@ const MainRoutes = {
     {
       path: '/book/:id',
       element: <Book />
+    },
+    {
+      path: '/upload',
+      element: <Upload />
     },
     {
       path: 'dashboard',
