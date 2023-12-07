@@ -1,31 +1,52 @@
 import React, { useState } from 'react';
-// material-ui
-// import { Typography } from '@mui/material';
+import AWS from 'aws-sdk';
 
-// project imports
-// import MainCard from 'ui-component/cards/MainCard';
+const S3_BUCKET = process.env.REACT_APP_S3_BUCKET;
+const REGION = process.env.REACT_APP_REGION;
+const ACCESS_KEY = process.env.REACT_APP_ACCESS_KEY;
+const SECRET_ACCESS_KEY = process.env.REACT_APP_SECRET_ACCESS_KEY;
 
-// ==============================|| SAMPLE PAGE ||============================== //
+AWS.config.update({
+  accessKeyId: ACCESS_KEY,
+  secretAccessKey: SECRET_ACCESS_KEY
+});
+
+const myBucket = new AWS.S3({
+  params: { Bucket: S3_BUCKET },
+  region: REGION
+});
 
 function Upload() {
+  const [progress, setProgress] = useState(0);
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileInput = (e) => {
     setSelectedFile(e.target.files[0]);
-    console.log(selectedFile);
   };
 
-  const handleUpload = async (file) => {
-    uploadFile(file, config)
-      .then((data) => console.log(data))
-      .catch((err) => console.error(err));
+  const uploadFile = (file) => {
+    const params = {
+      ACL: 'public-read',
+      Body: file,
+      Bucket: S3_BUCKET,
+      Key: file.name
+    };
+
+    myBucket
+      .putObject(params)
+      .on('httpUploadProgress', (evt) => {
+        setProgress(Math.round((evt.loaded / evt.total) * 100));
+      })
+      .send((err) => {
+        if (err) console.log(err);
+      });
   };
 
   return (
     <div>
-      <div>React S3 File Upload</div>
+      <div>Native SDK File Upload Progress is {progress}%</div>
       <input type="file" onChange={handleFileInput} />
-      <button onClick={() => handleUpload(selectedFile)}> Upload to S3</button>
+      <button onClick={() => uploadFile(selectedFile)}> Upload to S3</button>
     </div>
   );
 }
