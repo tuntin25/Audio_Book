@@ -1,23 +1,31 @@
+import React, { useState } from 'react';
 // material-ui
-import { Typography } from '@mui/material';
+// import { Typography } from '@mui/material';
 
 // project imports
-import MainCard from 'ui-component/cards/MainCard';
+// import MainCard from 'ui-component/cards/MainCard';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
 function Upload() {
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileInput = (e) => {
+    setSelectedFile(e.target.files[0]);
+    console.log(selectedFile);
+  };
+
+  const handleUpload = async (file) => {
+    uploadFile(file, config)
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err));
+  };
 
   return (
     <div>
-      <MainCard title="Sample Card">
-        <Typography variant="body2">
-          Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-          minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in
-          reprehended in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa
-          qui officiate descent molls anim id est labours.
-        </Typography>
-      </MainCard>
+      <div>React S3 File Upload</div>
+      <input type="file" onChange={handleFileInput} />
+      <button onClick={() => handleUpload(selectedFile)}> Upload to S3</button>
     </div>
   );
 }
