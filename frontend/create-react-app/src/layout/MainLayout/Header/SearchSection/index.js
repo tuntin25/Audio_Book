@@ -19,7 +19,6 @@ import { shouldForwardProp } from '@mui/system';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import SearchModal from 'ui-component/modal/SearchModal';
 
-
 // styles
 const PopperStyle = styled(Popper, { shouldForwardProp })(({ theme }) => ({
   zIndex: 1100,
@@ -63,7 +62,7 @@ const HeaderAvatarStyle = styled(Avatar, { shouldForwardProp })(({ theme }) => (
 
 // ==============================|| SEARCH INPUT - MOBILE||============================== //
 
-const MobileSearch = ({ value, setValue, popupState }) => {
+const MobileSearch = ({ value, setValue, popupState, openModal, handleOpenModal, handleCloseModal, listening, transcript }) => {
   const theme = useTheme();
 
   const navigate = useNavigate();
@@ -73,6 +72,11 @@ const MobileSearch = ({ value, setValue, popupState }) => {
       navigate(0);
     }
   };
+
+  useEffect(() => {
+    setValue(transcript);
+  }, [listening]);
+
   // const {
   //   transcript,
   //   listening,
@@ -85,53 +89,69 @@ const MobileSearch = ({ value, setValue, popupState }) => {
   // }
 
   return (
-    <OutlineInputStyle
-      id="input-search-header"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      placeholder="Tìm Theo Sách, Tác Giả hoặc Thể Loại"
-      // startAdornment={
-      //   <InputAdornment position="start">
-      //     <IconSearch stroke={1.5} size="1rem" color={theme.palette.grey[500]} />
-      //   </InputAdornment>
-      // }
-      endAdornment={
-        <InputAdornment position="end">
-          <ButtonBase
-            sx={{ borderRadius: '12px' }}
-            onClick={() => {
-              handleButtonClick(value);
-            }}
-          >
-            <HeaderAvatarStyle variant="rounded">
-              <IconSearch stroke={1.5} size="1.3rem" />
-            </HeaderAvatarStyle>
-          </ButtonBase>
-          <Box sx={{ ml: 2 }}>
-            <ButtonBase sx={{ borderRadius: '12px' }}>
-              <Avatar
-                variant="rounded"
-                sx={{
-                  ...theme.typography.commonAvatar,
-                  ...theme.typography.mediumAvatar,
-                  background: theme.palette.orange.light,
-                  color: theme.palette.orange.dark,
-                  '&:hover': {
-                    background: theme.palette.orange.dark,
-                    color: theme.palette.orange.light
-                  }
-                }}
-                {...bindToggle(popupState)}
-              >
-                <IconX stroke={1.5} size="1.3rem" />
-              </Avatar>
+    <>
+      <OutlineInputStyle
+        id="input-search-header"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="Tìm Theo Sách, Tác Giả hoặc Thể Loại"
+        // startAdornment={
+        //   <InputAdornment position="start">
+        //     <IconSearch stroke={1.5} size="1rem" color={theme.palette.grey[500]} />
+        //   </InputAdornment>
+        // }
+        endAdornment={
+          <InputAdornment position="end">
+            <ButtonBase
+              sx={{ borderRadius: '12px' }}
+              onClick={() => {
+                handleButtonClick(value);
+              }}
+            >
+              <HeaderAvatarStyle variant="rounded">
+                <IconSearch stroke={1.5} size="1.3rem" />
+              </HeaderAvatarStyle>
             </ButtonBase>
-          </Box>
-        </InputAdornment>
-      }
-      aria-describedby="search-helper-text"
-      inputProps={{ 'aria-label': 'weight' }}
-    />
+            <Box sx={{ ml: 2 }}>
+              <ButtonBase
+                sx={{ borderRadius: '12px' }}
+                onClick={() => {
+                  // handleMicrophone();
+                  handleOpenModal();
+                }}
+              >
+                <HeaderAvatarStyle variant="rounded">
+                  <IconMicrophone stroke={1.5} size="1.3rem" />
+                </HeaderAvatarStyle>
+              </ButtonBase>
+            </Box>
+            <Box sx={{ ml: 2 }}>
+              <ButtonBase sx={{ borderRadius: '12px' }}>
+                <Avatar
+                  variant="rounded"
+                  sx={{
+                    ...theme.typography.commonAvatar,
+                    ...theme.typography.mediumAvatar,
+                    background: theme.palette.orange.light,
+                    color: theme.palette.orange.dark,
+                    '&:hover': {
+                      background: theme.palette.orange.dark,
+                      color: theme.palette.orange.light
+                    }
+                  }}
+                  {...bindToggle(popupState)}
+                >
+                  <IconX stroke={1.5} size="1.3rem" />
+                </Avatar>
+              </ButtonBase>
+            </Box>
+          </InputAdornment>
+        }
+        aria-describedby="search-helper-text"
+        inputProps={{ 'aria-label': 'weight' }}
+      />
+      <SearchModal openModal={openModal} handleCloseModal={handleCloseModal} searchValue={value} listening={listening} />
+    </>
   );
 };
 
@@ -207,8 +227,6 @@ const SearchSection = () => {
   //   SpeechRecognition.startListening({ language: 'vi-VN' });
   // };
 
-
-
   return (
     <>
       <Box sx={{ display: { xs: 'block', md: 'none' } }}>
@@ -243,7 +261,16 @@ const SearchSection = () => {
                         <Box sx={{ p: 2 }}>
                           <Grid container alignItems="center" justifyContent="space-between">
                             <Grid item xs>
-                              <MobileSearch value={value} setValue={setValue} popupState={popupState} />
+                              <MobileSearch
+                                value={value}
+                                setValue={setValue}
+                                popupState={popupState}
+                                openModal={openModal}
+                                handleOpenModal={handleOpenModal}
+                                handleCloseModal={handleCloseModal}
+                                listening={listening}
+                                transcript={transcript}
+                              />
                             </Grid>
                           </Grid>
                         </Box>
@@ -296,10 +323,8 @@ const SearchSection = () => {
           aria-describedby="search-helper-text"
           inputProps={{ 'aria-label': 'weight' }}
         />
-      <SearchModal openModal={openModal} handleCloseModal={handleCloseModal} searchValue={searchValue} listening={listening} />
+        <SearchModal openModal={openModal} handleCloseModal={handleCloseModal} searchValue={searchValue} listening={listening} />
       </Box>
-     
-
     </>
   );
 };

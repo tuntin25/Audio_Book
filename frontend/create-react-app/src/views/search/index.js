@@ -60,11 +60,11 @@ function Search() {
             </Grid>
           ))
         ) : (
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'blue' }}>
-            <Box>
+          <Grid item xs={12}>
+            <Box textAlign='center'>
               <Typography textAlign="center">No book found</Typography>
             </Box>
-          </Box>
+          </Grid>
         )}
       </Grid>
     </Container>
