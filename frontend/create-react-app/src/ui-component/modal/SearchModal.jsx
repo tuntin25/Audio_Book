@@ -30,6 +30,8 @@ export default function SearchModal(props) {
   useEffect(() => {
     if (searchValue && !listening) {
       console.log('Search : ' + searchValue);
+      console.log('Open Modal: ' + openModal);
+      console.log('listening: ' + listening);
       handleCloseModal();
       navigate('/search/' + searchValue);
     }

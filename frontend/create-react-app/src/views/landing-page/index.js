@@ -11,11 +11,20 @@ import { IconMicrophone } from '@tabler/icons';
 import { useTheme } from '@mui/material/styles';
 import SearchModal from 'ui-component/modal/SearchModal';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-
+import FiberManualRecord from '@mui/icons-material/FiberManualRecord.js';
+import { IconButton } from '@mui/material';
 // project imports
 //import MainCard from 'ui-component/cards/MainCard';
 
 // ==============================|| SAMPLE PAGE ||============================== //
+
+const CustomDot = ({ onClick, active }) => {
+  return (
+    <IconButton onClick={onClick} sx={{ bottom: '-30px' }}>
+      <FiberManualRecord style={{ color: active ? 'initial' : 'grey' }} />
+    </IconButton>
+  );
+};
 
 const LandingPage = () => {
   const [bookList, setBookList] = useState([]);
@@ -119,7 +128,8 @@ const LandingPage = () => {
           backgroundSize: 'cover',
           height: '100vh',
           display: 'flex',
-          alignItems: 'center'
+          alignItems: 'center',
+          borderRadius: '10px'
         }}
       >
         <Container>
@@ -135,7 +145,9 @@ const LandingPage = () => {
         </Container>
       </Box>
 
-      <Box sx={{ background: 'white', backgroundSize: 'cover', height: '100vh', display: 'flex', alignItems: 'center' }}>
+      <Box
+        sx={{ background: 'white', backgroundSize: 'cover', height: '100vh', display: 'flex', alignItems: 'center', borderRadius: '20px' }}
+      >
         <Container>
           <Typography textAlign="center" fontSize="8vh" mb="50px">
             About us
@@ -156,7 +168,7 @@ const LandingPage = () => {
           <Typography variant="h1" textAlign="center" mb="50px" gutterBottom>
             Top Books
           </Typography>
-          <Box>
+          <Box sx={{ position: 'relative' }}>
             <Carousel
               responsive={responsive}
               autoPlay={true}
@@ -166,8 +178,10 @@ const LandingPage = () => {
               infinite={true}
               partialVisible={true}
               renderButtonGroupOutside={true}
+              renderDotsOutside={true}
               centerMode={false}
               removeArrowOnDeviceType={['tablet', 'mobile']}
+              customDot={<CustomDot />}
             >
               {bookList.map((book, index) => {
                 return (

@@ -61,6 +61,7 @@ const MainLayout = () => {
   const dispatch = useDispatch();
   const handleLeftDrawerToggle = () => {
     dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
+    console.log('matchDownMd: ' + matchDownMd);
   };
 
   return (
@@ -83,7 +84,8 @@ const MainLayout = () => {
       </AppBar>
 
       {/* drawer */}
-      <Sidebar drawerOpen={!matchDownMd ? !leftDrawerOpened : leftDrawerOpened} drawerToggle={handleLeftDrawerToggle} />
+      <Sidebar drawerOpen={matchDownMd ? !leftDrawerOpened : !leftDrawerOpened} drawerToggle={handleLeftDrawerToggle} />
+      {/* <Sidebar drawerOpen={leftDrawerOpened} draweToggle={handleLeftDrawerToggle} /> */}
 
       {/* main content */}
       <Main theme={theme} open={!leftDrawerOpened}>
